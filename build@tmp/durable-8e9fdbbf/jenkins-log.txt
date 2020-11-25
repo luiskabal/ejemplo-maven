@@ -1,0 +1,2 @@
+
+C:\TestJenkins\ejemplo-maven\build>start java -jar DevOpsUsach2020-0.0.1.jar 
