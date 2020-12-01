@@ -20,13 +20,13 @@ import com.google.gson.Gson;
 @RequestMapping(path = "/rest/mscovid")
 public class RestData {
 	
-	private final static Logger LOGGER = Logger.getLogger("devops.subnivel.Control");
+	private final Logger logger = Logger.getLogger("devops.subnivel.Control");
 
 	
 	@GetMapping(path = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Pais getData(@RequestParam(name = "msg") String message){
 		
-		LOGGER.log(Level.INFO, "Proceso exitoso de prueba");
+		logger.log(Level.INFO, "Proceso exitoso de prueba");
 		
 		Pais response = new Pais();
 		response.setMensaje("Mensaje Recibido: " + message);
@@ -39,7 +39,7 @@ public class RestData {
 		RestTemplate restTemplate = new RestTemplate();
 	    ResponseEntity<String> call= restTemplate.getForEntity("https://api.covid19api.com/live/country/" + message ,String.class);
 	    
-	    LOGGER.log(Level.INFO, "Consulta por pais");
+	    logger.log(Level.INFO, "Consulta por pais");
 	    
 		Pais response = new Pais();
 		int confirmed = 0;
@@ -69,16 +69,18 @@ public class RestData {
 	@GetMapping(path = "/estadoMundial", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Mundial getTotalMundial(){
 		
-		LOGGER.log(Level.INFO, "Consulta mundial");
+		logger.log(Level.INFO, "Consulta mundial");
 		
 		RestTemplate restTemplate = new RestTemplate();
 	    ResponseEntity<String> call= restTemplate.getForEntity("https://api.covid19api.com/world/total" ,String.class);
 	    Mundial response = new Mundial();
 		Gson gson = new Gson();
-        Mundial estado = gson.fromJson(call.getBody().toLowerCase(), Mundial.class);
-        response.setTotalConfirmed(estado.getTotalConfirmed());
-        response.setTotalDeaths(estado.getTotalDeaths());
-        response.setTotalRecovered(estado.getTotalRecovered());
+		Mundial estado = gson.fromJson(call.getBody().toLowerCase(), Mundial.class);
+	     response.setTotalConfirmed(estado.getTotalConfirmed());
+	        response.setTotalDeaths(estado.getTotalDeaths());
+	        response.setTotalRecovered(estado.getTotalRecovered());
+ 
+   
 
 		return response;		
 	}
