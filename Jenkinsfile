@@ -26,6 +26,14 @@ stages{
         }
 		
     }
+	stage('sonar'){
+		steps{
+			withSonarQubeEnv('sonar') { 
+			  sh 'mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+			}
+		}
+		
+	}
 	
 	 stage('Run'){
         steps{
