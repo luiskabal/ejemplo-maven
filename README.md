@@ -1,7 +1,7 @@
 # Getting Started
 
 ## Windows
-#aca
+##TEST
 ### Compile Code
 * ./mvnw.cmd clean compile -e
 
@@ -35,3 +35,5 @@
 
 ### Testing Application
 * curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'
+
+##SENDO TEST
