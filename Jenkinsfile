@@ -30,29 +30,26 @@ stages{
 		
 	}
 
-	 stage('uploadNexus'){
-		freeStyleJob('test-nexus2-tarea') {
+		stage('Nexus Upload'){
 			steps {
-			  nexusArtifactUploader {
-				nexusVersion('nexus3')
-				protocol('http')
-				nexusUrl('fcbfd6a37fff.ngrok.io')
-				groupId('org.springframework.boot')
-				version('2.3.4.RELEASE')
-				repository('test-repo')
-				credentialsId('nexusNgrok')
-				artifact {
-					artifactId('DevOpsUsach2020')
-					type('jar')
-					classifier('debug')
-					file('C:\TestJenkins\ejemplo-maven\build\DevOpsUsach2020-0.0.1.jar')
+				nexusArtifactUploader(
+				nexusVersion: 'nexus3',
+				protocol: 'http',
+				nexusUrl: 'http://fcbfd6a37fff.ngrok.io/',
+				groupId: 'com.devopsusach2020',
+				version: '0.0.1',
+				repository: 'test-nexus',
+				credentialsId: 'nexus',
+				artifacts: [
+					[artifactId: 'DevOpsUsach2020',
+					classifier: '',
+					file: 'C:/TestJenkins/ejemplo-maven/build/DevOpsUsach2020-0.0.1.jar',
+					type: 'jar']
+				]
+				)
 				}
-				
-			  }
-			}
 		}
-		
-	}	
+	
 }
 }
 
